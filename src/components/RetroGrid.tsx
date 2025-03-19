@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-const RetroGrid: React.FC = () => {
+interface RetroGridProps {
+  className?: string;
+}
+
+const RetroGrid: React.FC<RetroGridProps> = ({ className = '' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -13,22 +17,25 @@ const RetroGrid: React.FC = () => {
     // Set canvas size
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 0.6; // Only take up part of the screen height
     };
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
     // Grid properties
     const CELL_SIZE = 50;
-    const SPEED = 1;
+    const SPEED = 1.5; // Slightly faster speed
     let offset = 0;
 
     const drawGrid = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Set perspective vanishing point
-      const vanishingPointY = canvas.height * 0.5;
-      const horizonY = canvas.height * 0.5;
+      const horizonY = canvas.height * 0.25; // Lower horizon for better perspective
+
+      // Add glow effect for grid
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = "#ff00ff";
 
       // Draw vertical lines
       for (let x = 0; x <= canvas.width + CELL_SIZE; x += CELL_SIZE) {
@@ -81,7 +88,7 @@ const RetroGrid: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10"
+      className={`w-full h-full ${className}`}
     />
   );
 };

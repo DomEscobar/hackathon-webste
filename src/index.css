@@ -56,12 +56,54 @@
   }
 }
 
+@keyframes neon-pulse {
+  0% {
+    box-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 15px #f0f, 0 0 20px #f0f;
+  }
+  50% {
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 15px #f0f, 0 0 20px #f0f;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
 .animate-glitch1 {
   animation: glitch1 4s infinite linear alternate-reverse;
 }
 
 .animate-glitch2 {
   animation: glitch2 5s infinite linear alternate-reverse;
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2s infinite;
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+.animate-border-flow {
+  animation: border-flow 8s linear infinite;
 }
 
 @layer base {
@@ -74,5 +116,52 @@
   .neon-line {
     @apply h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-75;
     box-shadow: 0 0 10px theme('colors.cyan.400');
+  }
+  
+  .cyber-box {
+    @apply relative p-0.5 overflow-hidden;
+    background: linear-gradient(90deg, #fc00ff, #00dbde, #fc00ff, #00dbde);
+    background-size: 400% 100%;
+  }
+  
+  .cyber-box-inner {
+    @apply bg-gray-900 p-6 h-full flex flex-col;
+  }
+  
+  .cyber-section {
+    @apply relative py-20 overflow-hidden;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  }
+  
+  .cyber-card {
+    @apply relative;
+    background: rgba(10, 12, 18, 0.75);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cyber-scanline {
+    @apply absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 z-10;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.2) 50%, transparent 50%, transparent);
+    background-size: 100% 4px;
+  }
+  
+  .cyber-heading {
+    @apply font-bold tracking-wider;
+    text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+  }
+  
+  .cyber-angled-bg {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #090a0f 0%, #141e30 100%);
+  }
+  
+  .cyber-angled-bg::before {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(45deg, transparent 48%, rgba(0, 255, 255, 0.5) 49%, rgba(0, 255, 255, 0.5) 51%, transparent 52%);
+    background-size: 10px 10px;
+    opacity: 0.1;
   }
 }
