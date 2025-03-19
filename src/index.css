@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes glitch1 {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-0.5px, 0.5px);
+  }
+  20% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(0.5px, -0.5px);
+  }
+  40% {
+    clip-path: inset(40% 0 40% 0);
+    transform: translate(0.5px, 0.5px);
+  }
+  60% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(-0.5px, -0.5px);
+  }
+  80% {
+    clip-path: inset(0 0 80% 0);
+    transform: translate(0.5px, 0.5px);
+  }
+  100% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-0.5px, 0.5px);
+  }
+}
+
+@keyframes glitch2 {
+  0% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(0.5px, -0.5px);
+  }
+  20% {
+    clip-path: inset(40% 0 40% 0);
+    transform: translate(-0.5px, 0.5px);
+  }
+  40% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(0.5px, -0.5px);
+  }
+  60% {
+    clip-path: inset(0 0 80% 0);
+    transform: translate(-0.5px, 0.5px);
+  }
+  80% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(0.5px, -0.5px);
+  }
+  100% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(0.5px, -0.5px);
+  }
+}
+
+.animate-glitch1 {
+  animation: glitch1 4s infinite linear alternate-reverse;
+}
+
+.animate-glitch2 {
+  animation: glitch2 5s infinite linear alternate-reverse;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+@layer components {
+  .neon-line {
+    @apply h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-75;
+    box-shadow: 0 0 10px theme('colors.cyan.400');
+  }
+}
